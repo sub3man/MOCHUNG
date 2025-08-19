@@ -3,315 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 맹다솔 ♥ 지창대 결혼식에 초대합니다</title>
+    <title>맹다솔 ♥ 지창대 결혼식에 초대합니다</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
+        /* --- 기본 & 폰트 설정 --- */
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
             color: #333;
+            background-color: #FDFCFB;
+            word-break: keep-all;
         }
-        .title-font {
-            font-family: 'Nanum Myeongjo', serif;
+
+        /* --- 애니메이션 --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .flower-bg {
-            background-image: url('https://placehold.co/1000x800/FFF0F5/FFC0CB?text=배경+이미지+예시'); /* 중요: 이 배경 이미지도 실제 이미지 URL로 교체해주세요. */
-            background-size: cover;
-            background-position: center;
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .gallery-image {
-            width: 100%;
-            height: 300px; /* 갤러리 이미지 높이 조절 */
-            object-fit: cover;
-            border-radius: 0.5rem;
+        .main-image-zoom {
+            animation: zoom-out 40s linear infinite;
         }
-        .btn-primary {
-            background-color: #FFC0CB; /* 연분홍색 */
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            text-decoration: none; /* 링크 밑줄 제거 */
+        @keyframes zoom-out {
+            0% { transform: scale(1.15); }
+            100% { transform: scale(1); }
         }
-        .btn-primary:hover {
-            background-color: #FFB6C1; /* 조금 더 진한 분홍색 */
-        }
-        .btn-secondary {
-            background-color: #A0D2DB; /* 연한 하늘색 */
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        .btn-secondary:hover {
-            background-color: #88C0CA;
-        }
-        .modal {
-            display: none; /* 기본적으로 숨김 */
+
+        /* --- 갤러리 라이트박스 --- */
+        .lightbox {
+            display: none;
             position: fixed;
             z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
         }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 0.5rem;
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .lightbox-close, .lightbox-nav {
+            position: absolute;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .lightbox-close { top: 20px; right: 30px; }
+        .lightbox-nav.prev { left: 20px; }
+        .lightbox-nav.next { right: 20px; }
+
+        /* --- 달력 --- */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        .calendar-day {
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 38px; /* 하트 모양을 위한 높이 고정 */
         }
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
+        .wedding-day {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            color: white;
             font-weight: bold;
         }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        /* 하트 모양 배경 */
+        .wedding-day::before,
+        .wedding-day::after {
+            content: "";
+            position: absolute;
+            top: 6px; /* 위치 조정 */
+            left: 19px;
+            width: 19px; /* 크기 조정 */
+            height: 30px; /* 크기 조정 */
+            background: #E6B4B8;
+            border-radius: 20px 20px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+            z-index: 0;
         }
-        .shadow-pink {
-           box-shadow: 0 10px 15px -3px rgba(255, 182, 193, 0.3), 0 4px 6px -2px rgba(255, 182, 193, 0.15);
+        .wedding-day::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
         }
-        .map_embed_wrap {
-            /* 높이는 Tailwind CSS (h-[400px]) 또는 인라인 스타일로 지정 */
-        }
-        .root_daum_roughmap_landing { /* 카카오맵 기본 클래스 */
-            width: 100%;
-            height: 100%;
+        .wedding-day span {
+            position: relative; /* 숫자 텍스트를 하트 위로 */
+            z-index: 1;
         }
     </style>
 </head>
-<body class="bg-pink-50">
+<body class="bg-gray-50">
 
-    <section class="flower-bg text-center py-20 px-6">
-        <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-pink inline-block">
-            <h1 class="title-font text-4xl md:text-5xl font-bold text-pink-500">맹다솔 & 지창대</h1>
-            <p class="text-lg md:text-xl mt-4 text-gray-700">우리의 아름다운 시작을 함께 축복해주세요.</p>
-            <p class="text-2xl md:text-3xl title-font mt-6 text-pink-400">2025년 12월 21일 일요일 오후 3시</p>
-            <p class="text-lg md:text-xl mt-2 text-gray-600">고려대학교 교우회관</p>
+    <!-- 메인 타이틀 -->
+    <section class="text-center pt-24 pb-16 bg-white">
+        <p class="text-gray-500 text-sm tracking-widest reveal">WEDDING INVITATION</p>
+        <div class="my-6 reveal">
+            <h1 class="text-3xl font-semibold">맹다솔</h1>
+            <p class="text-lg my-2">&</p>
+            <h1 class="text-3xl font-semibold">지창대</h1>
         </div>
+        <p class="text-gray-600 reveal">
+            2025년 12월 21일 일요일 오후 3시<br>
+            고려대학교 교우회관
+        </p>
     </section>
+    
+    <!-- 메인 사진 -->
+    <div class="w-full h-[70vh] overflow-hidden">
+        <div class="w-full h-full bg-cover bg-center main-image-zoom" style="background-image: url('https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(2).jpg?raw=true')"></div>
+    </div>
 
-    <section class="py-12 px-6 bg-white">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="title-font text-3xl font-semibold mb-6 text-pink-500">초대합니다</h2>
-            <p class="text-gray-700 leading-relaxed mb-4">
-                서로 마주보며 다져온 사랑을 <br>
-                이제 함께 한 곳을 바라보며 걸어갈 수 있는 <br>
-                큰 사랑으로 키우고자 합니다. <br>
-                저희 두 사람이 사랑의 이름으로 지켜나갈 수 있도록 <br>
-                앞날을 축복해 주시면 감사하겠습니다.
-            </p>
-            <div class="mt-6 text-lg text-gray-800">
-                <p><span class="font-bold">[지정익]</span> · <span class="font-bold">[신랑 어머니 성함]</span> 의 아들 <span class="font-bold">지창대</span></p>
-                <p><span class="font-bold">[맹도영]</span> · <span class="font-bold">[신부 어머니 성함]</span> 의 딸 <span class="font-bold">맹다솔</span></p>
+    <!-- 초대글 -->
+    <section class="text-center py-20 px-6 bg-white">
+        <p class="text-2xl leading-relaxed reveal">
+            함께 라는 이름으로<br>
+            같은 곳을 바라보며<br>
+            첫 걸음을 내딛습니다.
+        </p>
+        <div class="w-12 h-px bg-gray-200 mx-auto my-12 reveal"></div>
+        <p class="leading-loose text-gray-600 reveal">
+            서로 마주보며 다져온 사랑을<br>
+            이제 함께 한 곳을 바라보며 걸어갈 수 있는<br>
+            큰 사랑으로 키우고자 합니다.<br>
+            저희 두 사람이 사랑의 이름으로 지켜나갈 수 있도록<br>
+            앞날을 축복해 주시면 감사하겠습니다.
+        </p>
+        <div class="mt-12 text-lg text-gray-800 reveal">
+            <div class="mb-4">
+                <span class="font-semibold">지정익</span> · <span class="font-semibold">이경희</span> 의 아들 <span class="font-bold">지창대</span>
+            </div>
+            <div>
+                <span class="font-semibold">맹도영</span> · <span class="font-semibold">한영숙</span> 의 딸 <span class="font-bold">맹다솔</span>
             </div>
         </div>
     </section>
 
-    <section class="py-12 px-6 bg-pink-50">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="title-font text-3xl font-semibold text-center mb-8 text-pink-500">우리의 순간들</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <img src="https://drive.google.com/uc?export=view&id=1IMP1uyQoE5PYh7dUoMjDU_ccKhSP7_A-" alt="[웨딩 사진 1]" class="gallery-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FFE4E1/DB7093?text=이미지+로드+실패';">
-                <img src="https://drive.google.com/uc?export=view&id=1zSRZEUNlr-fB0hgLr6YqMWQmBdU3r8GV" alt="[웨딩 사진 2]" class="gallery-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FFDAB9/CD5C5C?text=이미지+로드+실패';">
-                <img src="https://drive.google.com/uc?export=view&id=1Xozh25g1Gpk66R3MDYHcChzjtqZpBeCa" alt="[웨딩 사진 3]" class="gallery-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/E6E6FA/8A2BE2?text=이미지+로드+실패';">
-                <img src="https://drive.google.com/uc?export=view&id=1wMlatiqNMDeBftEoeayftW7CimJeLsZi" alt="[웨딩 사진 4]" class="gallery-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FFF0F5/FF69B4?text=이미지+로드+실패';">
-                <img src="https://drive.google.com/uc?export=view&id=1EVmE-7rXNROcI9-jQGs5PNITvie-9xhh" alt="[웨딩 사진 5]" class="gallery-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FAFAD2/DAA520?text=이미지+로드+실패';">
-                <img src="https://drive.google.com/uc?export=view&id=1PCZ6E6ExFUkWmC8QwWkaEvJzL1vS7X1L" alt="[웨딩 사진 6]" class="gallery-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/ADD8E6/4682B4?text=이미지+로드+실패';">
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 px-6 bg-white">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="title-font text-3xl font-semibold text-center mb-8 text-pink-500">오시는 길</h2>
+    <!-- 달력 -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-md mx-auto reveal">
+            <h2 class="text-2xl font-semibold text-center mb-8 text-gray-800">Calendar</h2>
             <div class="text-center mb-8">
-                <p class="text-xl font-medium text-gray-800">고려대학교 교우회관</p>
-                <p class="text-gray-600">서울특별시 성북구 안암로 145 </p> <p class="text-gray-600 mt-1">Tel: [웨딩홀 전화번호]</p> </div>
-
-            <div class="map_embed_wrap w-full rounded-lg shadow-md border border-gray-200 overflow-hidden h-[400px]">
-                <div id="daumRoughmapContainer1747294846574" class="root_daum_roughmap root_daum_roughmap_landing">
-                    </div>
+                <p class="text-3xl font-bold text-gray-800">2025. 12. 21. SUNDAY PM 3:00</p>
+                <p id="d-day" class="text-lg text-gray-600 mt-2"></p>
             </div>
-            <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-
-            <script charset="UTF-8">
-                new daum.roughmap.Lander({
-                    "timestamp" : "1747294846574", // 사용자 제공 타임스탬프
-                    "key" : "2o2hu",               // 사용자 제공 키
-                    "mapWidth" : "100%",           // 컨테이너 너비에 맞춤
-                    "mapHeight" : "100%"           // 컨테이너 높이에 맞춤 (400px)
-                }).render();
-            </script>
-            <div class="flex justify-center space-x-4 mt-6">
-                <a href="https://kko.kakao.com/XLiE25FJzx" target="_blank" class="btn-primary inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill mr-2" viewBox="0 0 16 16">
-                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                    </svg>
-                    카카오맵 길찾기
-                </a>
-                 <a href="https://naver.me/GV2th40D" target="_blank" class="btn-primary" style="background-color: #03C75A;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill mr-2 inline" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8z"/>
-                        <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
-                    </svg>
-                    네이버 지도
-                </a>
-            </div>
-            <p class="text-center text-sm text-gray-500 mt-2">
-                </p>
-        </div>
-    </section>
-
-    <section class="py-12 px-6 bg-pink-50">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="title-font text-3xl font-semibold text-center mb-8 text-pink-500">마음 전하실 곳</h2>
-            <div class="space-y-6">
-                <div>
-                    <h3 class="text-xl font-medium text-gray-800 mb-2">신랑측 계좌</h3>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                        <p class="text-gray-700">신랑 아버지 <span class="font-bold">[아버지 성함]</span>: <span id="groom-father-account">[은행명 계좌번호]</span></p>
-                        <button onclick="copyToClipboard('groom-father-account', '신랑 아버지 계좌번호')" class="btn-secondary mt-2 text-sm">계좌번호 복사</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mt-3">
-                        <p class="text-gray-700">신랑 <span class="font-bold">지창대</span>: <span id="groom-account">[은행명 계좌번호]</span></p>
-                        <button onclick="copyToClipboard('groom-account', '신랑 계좌번호')" class="btn-secondary mt-2 text-sm">계좌번호 복사</button>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-xl font-medium text-gray-800 mb-2">신부측 계좌</h3>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                        <p class="text-gray-700">신부 아버지 <span class="font-bold">[아버지 성함]</span>: <span id="bride-father-account">[은행명 계좌번호]</span></p>
-                        <button onclick="copyToClipboard('bride-father-account', '신부 아버지 계좌번호')" class="btn-secondary mt-2 text-sm">계좌번호 복사</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mt-3">
-                        <p class="text-gray-700">신부 <span class="font-bold">맹다솔</span>: <span id="bride-account">[은행명 계좌번호]</span></p>
-                        <button onclick="copyToClipboard('bride-account', '신부 계좌번호')" class="btn-secondary mt-2 text-sm">계좌번호 복사</button>
-                    </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <p class="text-center font-bold text-xl mb-4">12<span class="text-base font-normal">월</span></p>
+                <div class="calendar-grid text-sm">
+                    <div class="calendar-day text-red-500">일</div>
+                    <div class="calendar-day">월</div>
+                    <div class="calendar-day">화</div>
+                    <div class="calendar-day">수</div>
+                    <div class="calendar-day">목</div>
+                    <div class="calendar-day">금</div>
+                    <div class="calendar-day">토</div>
+                    <!-- 2025년 12월 달력 (1일은 월요일) -->
+                    <div class="calendar-day"></div>
+                    <div class="calendar-day"><span>1</span></div><div class="calendar-day"><span>2</span></div><div class="calendar-day"><span>3</span></div><div class="calendar-day"><span>4</span></div><div class="calendar-day"><span>5</span></div><div class="calendar-day"><span>6</span></div>
+                    <div class="calendar-day text-red-500"><span>7</span></div><div class="calendar-day"><span>8</span></div><div class="calendar-day"><span>9</span></div><div class="calendar-day"><span>10</span></div><div class="calendar-day"><span>11</span></div><div class="calendar-day"><span>12</span></div><div class="calendar-day"><span>13</span></div>
+                    <div class="calendar-day text-red-500"><span>14</span></div><div class="calendar-day"><span>15</span></div><div class="calendar-day"><span>16</span></div><div class="calendar-day"><span>17</span></div><div class="calendar-day"><span>18</span></div><div class="calendar-day"><span>19</span></div><div class="calendar-day"><span>20</span></div>
+                    <div class="calendar-day wedding-day"><span>21</span></div><div class="calendar-day"><span>22</span></div><div class="calendar-day"><span>23</span></div><div class="calendar-day"><span>24</span></div><div class="calendar-day"><span>25</span></div><div class="calendar-day"><span>26</span></div><div class="calendar-day"><span>27</span></div>
+                    <div class="calendar-day text-red-500"><span>28</span></div><div class="calendar-day"><span>29</span></div><div class="calendar-day"><span>30</span></div><div class="calendar-day"><span>31</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-12 px-6 bg-white text-center">
-        <h2 class="title-font text-3xl font-semibold mb-6 text-pink-500">연락처</h2>
-        <div class="space-y-3 text-gray-700">
-            <p>신랑 <span class="font-bold">지창대</span>: <a href="tel:[신랑 연락처]" class="text-blue-500 hover:underline">[신랑 연락처]</a></p>
-            <p>신부 <span class="font-bold">맹다솔</span>: <a href="tel:[신부 연락처]" class="text-blue-500 hover:underline">[신부 연락처]</a></p>
-            <p class="mt-4">신랑측 혼주</p>
-            <p>아버지 <span class="font-bold">[지정익]</span>: <a href="tel:[신랑 아버지 연락처]" class="text-blue-500 hover:underline">[신랑 아버지 연락처]</a></p>
-            <p>어머니 <span class="font-bold">[신랑 어머니 성함]</span>: <a href="tel:[신랑 어머니 연락처]" class="text-blue-500 hover:underline">[신랑 어머니 연락처]</a></p>
-            <p class="mt-4">신부측 혼주</p>
-            <p>아버지 <span class="font-bold">[맹도영]</span>: <a href="tel:[신부 아버지 연락처]" class="text-blue-500 hover:underline">[신부 아버지 연락처]</a></p>
-            <p>어머니 <span class="font-bold">[신부 어머니 성함]</span>: <a href="tel:[신부 어머니 연락처]" class="text-blue-500 hover:underline">[신부 어머니 연락처]</a></p>
+    <!-- 갤러리 -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="text-2xl font-semibold text-center mb-8 text-gray-800">Gallery</h2>
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(2).jpg?raw=true" alt="웨딩 사진 1" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(5).jpg?raw=true" alt="웨딩 사진 2" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(3).jpg?raw=true" alt="웨딩 사진 3" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(4).jpg?raw=true" alt="웨딩 사진 4" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(6).jpg?raw=true" alt="웨딩 사진 5" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(1).jpg?raw=true" alt="웨딩 사진 6" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+            </div>
         </div>
     </section>
 
-    <footer class="text-center py-8 bg-pink-100 text-pink-700">
-        <p class="title-font text-xl">Thank You</p>
-        <p class="text-sm">© 2025 지창대 & 맹다솔. All Rights Reserved.</p>
-    </footer>
+    <!-- 오시는 길 -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-md mx-auto text-center reveal">
+            <h2 class="text-2xl font-semibold mb-8 text-gray-800">Information</h2>
+            <p class="text-xl font-semibold text-gray-800">고려대학교 교우회관</p>
+            <p class="text-gray-600 mt-2">서울특별시 성북구 안암로 145</p>
+            <div class="my-8 border border-gray-200 rounded-lg overflow-hidden">
+                <a href="https://map.kakao.com/?urlX=507877.0&urlY=1136800.0&itemId=17565864&q=%EA%B3%A0%EB%A0%A4%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B5%90%EC%9A%B0%ED%9A%8C%EA%B4%80&srcid=17565864&map_type=TYPE_MAP" target="_blank">
+                    <img class="w-full" src="http://t1.daumcdn.net/roughmap/imgmap/46794fdc530836464ef18fb6ce386bbdbd4ea3d55cf11b3ffb7528575e38a4f9" alt="고려대학교 교우회관 지도">
+                </a>
+            </div>
+            <div class="flex justify-center space-x-2">
+                <a href="https://kko.kakao.com/XLiE25FJzx" target="_blank" class="w-full bg-yellow-400 text-gray-800 font-semibold py-3 rounded-md">카카오맵</a>
+                <a href="https://naver.me/GV2th40D" target="_blank" class="w-full bg-green-500 text-white font-semibold py-3 rounded-md">네이버지도</a>
+            </div>
+        </div>
+    </section>
 
-    <div id="alertModal" class="modal">
-      <div class="modal-content">
-        <span class="close-button" onclick="closeModal()">&times;</span>
-        <p id="alertMessage" class="text-lg py-4"></p>
-        <button onclick="closeModal()" class="btn-primary">확인</button>
-      </div>
+    <!-- 마음 전하실 곳 -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-md mx-auto text-center reveal">
+            <h2 class="text-2xl font-semibold mb-8 text-gray-800">Give Heart</h2>
+            <p class="text-gray-600">축하해주시는 따뜻한 마음<br>소중히 간직하겠습니다.</p>
+            <div class="mt-8 space-y-6 text-left">
+                <div>
+                    <h3 class="font-semibold text-lg mb-3">신랑측 마음 전하실 곳</h3>
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">신랑 아버지 지정익</p>
+                                <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
+                            </div>
+                            <button onclick="copyToClipboard(this)" data-copy-text="[은행명] [계좌번호] 지정익" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">신랑 지창대</p>
+                                <p class="text-sm text-gray-600">SC은행 496-20-038266</p>
+                            </div>
+                            <button onclick="copyToClipboard(this)" data-copy-text="SC은행 496-20-038266 지창대" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-3">신부측 마음 전하실 곳</h3>
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">신부 아버지 맹도영</p>
+                                <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
+                            </div>
+                            <button onclick="copyToClipboard(this)" data-copy-text="[은행명] [계좌번호] 맹도영" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">신부 맹다솔</p>
+                                <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
+                            </div>
+                            <button onclick="copyToClipboard(this)" data-copy-text="[은행명] [계좌번호] 맹다솔" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 마무리 -->
+    <section class="text-center py-24 px-6 bg-gray-50">
+        <p class="text-2xl reveal">감사합니다</p>
+    </section>
+
+    <!-- 갤러리 라이트박스 -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-nav prev">&#10094;</span>
+        <img id="lightbox-img" src="" alt="확대 이미지">
+        <span class="lightbox-nav next">&#10095;</span>
+    </div>
+    
+    <!-- 토스트 알림 (기존 모달 대체) -->
+    <div id="toast-notification" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full text-center shadow-lg transition-all duration-300 opacity-0 pointer-events-none">
+        복사되었습니다!
     </div>
 
     <script>
-        // 클립보드 복사 함수
-        function copyToClipboard(elementId, accountName) {
-            const accountElement = document.getElementById(elementId);
-            if (!accountElement) {
-                console.error("Element not found:", elementId);
-                showAlert(`${accountName} 정보를 찾을 수 없습니다.`);
-                return;
-            }
-            const accountTextElement = accountElement.innerText;
-            let textToCopy = accountTextElement;
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 스크롤 애니메이션 ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-            // 실제 계좌번호 부분만 복사하기 위한 로직 (': ' 이후의 문자열)
-            if (accountTextElement.includes(': ')) {
-                 textToCopy = accountTextElement.substring(accountTextElement.indexOf(': ') + 2).trim();
-            } else if (accountElement.textContent.includes(': ')) { // IE나 일부 브라우저 호환성 고려
-                 textToCopy = accountElement.textContent.substring(accountElement.textContent.indexOf(': ') + 2).trim();
-            }
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
 
-            // placeholder 값([은행명 계좌번호] 등)이 복사되지 않도록 방지
-            if (textToCopy.startsWith("[")) {
-                showAlert('계좌번호가 입력되지 않았습니다. 청첩장 제작자에게 문의하세요.');
-                return;
+            // --- D-Day 계산 ---
+            const weddingDay = new Date('2025-12-21T15:00:00');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // 시간은 제외하고 날짜만 비교
+            const diffTime = weddingDay.getTime() - today.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const dDayEl = document.getElementById('d-day');
+            if (dDayEl) {
+                if (diffDays > 0) {
+                    dDayEl.textContent = `맹다솔 ♥ 지창대의 결혼식이 ${diffDays}일 남았습니다.`;
+                } else if (diffDays === 0) {
+                    dDayEl.textContent = '맹다솔 ♥ 지창대의 결혼식, 바로 오늘입니다!';
+                } else {
+                    dDayEl.textContent = '맹다솔 ♥ 지창대의 결혼식이 행복하게 마무리되었습니다.';
+                }
             }
+            
+            // --- 갤러리 라이트박스 ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('#gallery-grid img');
+            let currentIndex = 0;
 
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(textToCopy)
-                    .then(() => {
-                        showAlert(`${accountName} (${textToCopy}) 가 클립보드에 복사되었습니다.`);
-                    })
-                    .catch(err => {
-                        console.error('클립보드 복사 실패 (navigator.clipboard): ', err);
-                        fallbackCopyToClipboard(textToCopy, accountName);
-                    });
-            } else {
-                // navigator.clipboard API를 지원하지 않는 경우 (주로 http 환경 또는 구형 브라우저)
-                fallbackCopyToClipboard(textToCopy, accountName);
-            }
+            const showImage = (index) => {
+                if (index >= 0 && index < galleryImages.length) {
+                    lightboxImg.src = galleryImages[index].src;
+                    currentIndex = index;
+                    lightbox.style.display = 'flex';
+                }
+            };
+
+            galleryImages.forEach((img, index) => {
+                img.addEventListener('click', () => showImage(index));
+            });
+            
+            document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.style.display = 'none');
+            document.querySelector('.lightbox-nav.prev').addEventListener('click', () => showImage(currentIndex - 1));
+            document.querySelector('.lightbox-nav.next').addEventListener('click', () => showImage(currentIndex + 1));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                }
+            });
+        });
+        
+        // --- 클립보드 복사 (토스트 알림 적용) ---
+        const toast = document.getElementById('toast-notification');
+        let toastTimer;
+
+        function showToast(message) {
+            if (toastTimer) clearTimeout(toastTimer);
+            toast.textContent = message;
+            toast.classList.remove('opacity-0');
+            toastTimer = setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 2000); // 2초 후 사라짐
         }
 
-        // 대체 클립보드 복사 함수 (execCommand 사용)
-        function fallbackCopyToClipboard(text, accountName) {
+        function copyToClipboard(buttonElement) {
+            const textToCopy = buttonElement.getAttribute('data-copy-text');
+            if (!textToCopy || textToCopy.includes('[') || textToCopy.includes(']')) {
+                showToast('계좌 정보가 입력되지 않았습니다.');
+                return;
+            }
             const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed"; // 화면에 보이지 않도록 처리
-            textArea.style.left = "-9999px";
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
             try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showAlert(`${accountName} (${text}) 가 클립보드에 복사되었습니다.`);
-                } else {
-                    showAlert('클립보드 복사에 실패했습니다. 직접 복사해주세요.');
-                }
+                document.execCommand('copy');
+                showToast('계좌번호가 복사되었습니다.');
             } catch (err) {
-                showAlert('클립보드 복사에 실패했습니다. 직접 복사해주세요.');
+                showToast('복사에 실패했습니다.');
             }
             document.body.removeChild(textArea);
-        }
-
-        // 알림 모달 관련 함수
-        const modal = document.getElementById('alertModal');
-        const alertMessage = document.getElementById('alertMessage');
-
-        function showAlert(message) {
-            alertMessage.textContent = message;
-            modal.style.display = "block";
-        }
-
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        // 모달 외부 클릭 시 닫기
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
         }
     </script>
 </body>
