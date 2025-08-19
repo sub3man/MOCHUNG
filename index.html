@@ -107,6 +107,26 @@
             z-index: 1;
         }
     </style>
+    <!-- Tally 팝업 스크립트 시작 -->
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <script>
+    window.TallyConfig = {
+      "formId": "wAgABN",
+      "popup": {
+        "width": 280,
+        "emoji": {
+          "text": "👋",
+          "animation": "wave"
+        },
+        "overlay": true,
+        "open": {
+          "trigger": "scroll",
+          "scrollPercent": 90
+        }
+      }
+    };
+    </script>
+    <!-- Tally 팝업 스크립트 끝 -->
 </head>
 <body class="bg-gray-50">
 
