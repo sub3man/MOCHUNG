@@ -150,7 +150,6 @@
             앞날을 축복해 주시면 감사하겠습니다.
         </p>
         <div class="mt-12 text-lg text-gray-800 reveal">
-            <!-- 요청에 따라 이전 레이아웃으로 복구 -->
             <div class="mb-4">
                 <span class="font-semibold">지정익</span> · <span class="font-semibold">이경희</span> 의 아들 <span class="font-bold">지창대</span>
             </div>
@@ -195,24 +194,30 @@
         <div class="max-w-4xl mx-auto reveal">
             <h2 class="text-2xl font-semibold text-center mb-8 text-gray-800">Gallery</h2>
             <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                <!-- 초기에 보여줄 사진 (1행) -->
                 <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(2).jpg?raw=true" alt="웨딩 사진 1" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
                 <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(5).jpg?raw=true" alt="웨딩 사진 2" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
                 <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(3).jpg?raw=true" alt="웨딩 사진 3" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
                 <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(4).jpg?raw=true" alt="웨딩 사진 4" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
                 <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(6).jpg?raw=true" alt="웨딩 사진 5" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
                 <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(1).jpg?raw=true" alt="웨딩 사진 6" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(1).jpg?raw=true" alt="웨딩 사진 7" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(2).jpg?raw=true" alt="웨딩 사진 8" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(3).jpg?raw=true" alt="웨딩 사진 9" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(4).jpg?raw=true" alt="웨딩 사진 10" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(5).jpg?raw=true" alt="웨딩 사진 11" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(6).jpg?raw=true" alt="웨딩 사진 12" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(7).jpg?raw=true" alt="웨딩 사진 13" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(8).jpg?raw=true" alt="웨딩 사진 14" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(9).jpg?raw=true" alt="웨딩 사진 15" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(10).jpg?raw=true" alt="웨딩 사진 16" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(11).jpg?raw=true" alt="웨딩 사진 17" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(12).jpg?raw=true" alt="웨딩 사진 18" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <!-- 더보기 버튼으로 보여줄 사진들 (초기 숨김) -->
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(1).jpg?raw=true" alt="웨딩 사진 7" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(2).jpg?raw=true" alt="웨딩 사진 8" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(3).jpg?raw=true" alt="웨딩 사진 9" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(4).jpg?raw=true" alt="웨딩 사진 10" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(5).jpg?raw=true" alt="웨딩 사진 11" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(6).jpg?raw=true" alt="웨딩 사진 12" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(7).jpg?raw=true" alt="웨딩 사진 13" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(8).jpg?raw=true" alt="웨딩 사진 14" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(9).jpg?raw=true" alt="웨딩 사진 15" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(10).jpg?raw=true" alt="웨딩 사진 16" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(11).jpg?raw=true" alt="웨딩 사진 17" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(12).jpg?raw=true" alt="웨딩 사진 18" class="w-full h-48 md:h-64 object-cover cursor-pointer hidden" oncontextmenu="return false;" draggable="false">
+            </div>
+            <!-- '더보기' 버튼 추가 -->
+            <div class="text-center mt-8">
+                <button id="show-more-btn" class="bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-full text-sm">사진 더보기</button>
             </div>
         </div>
     </section>
@@ -388,6 +393,19 @@
                 else if (swipeDistance < -50) {
                     showImage(currentIndex + 1);
                 }
+            });
+
+            // --- 갤러리 더보기 기능 ---
+            const hiddenImages = document.querySelectorAll('#gallery-grid img.hidden');
+            const showMoreBtn = document.getElementById('show-more-btn');
+            
+            showMoreBtn.addEventListener('click', () => {
+                // 숨겨진 모든 사진을 보여줍니다.
+                hiddenImages.forEach(img => {
+                    img.classList.remove('hidden');
+                });
+                // 더보기 버튼을 숨깁니다.
+                showMoreBtn.style.display = 'none';
             });
         });
 
