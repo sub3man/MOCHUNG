@@ -44,6 +44,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.85);
             justify-content: center;
+            -ms-flex-align: center;
             align-items: center;
         }
         .lightbox img {
@@ -56,6 +57,9 @@
             color: white;
             font-size: 2.5rem;
             cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             user-select: none;
         }
         .lightbox-close { top: 20px; right: 30px; }
@@ -72,6 +76,7 @@
             text-align: center;
             display: flex;
             justify-content: center;
+            -ms-flex-align: center;
             align-items: center;
             height: 38px; /* 하트 모양을 위한 높이 고정 */
         }
@@ -107,26 +112,6 @@
             z-index: 1;
         }
     </style>
-    <!-- Tally 팝업 스크립트 시작 -->
-    <script async src="https://tally.so/widgets/embed.js"></script>
-    <script>
-    window.TallyConfig = {
-      "formId": "wAgABN",
-      "popup": {
-        "width": 280,
-        "emoji": {
-          "text": "👋",
-          "animation": "wave"
-        },
-        "overlay": true,
-        "open": {
-          "trigger": "scroll",
-          "scrollPercent": 90
-        }
-      }
-    };
-    </script>
-    <!-- Tally 팝업 스크립트 끝 -->
 </head>
 <body class="bg-gray-50">
 
@@ -145,8 +130,8 @@
     </section>
     
     <!-- 메인 사진 -->
-    <div class="w-full h-[70vh] overflow-hidden">
-        <div class="w-full h-full bg-cover bg-center main-image-zoom" style="background-image: url('https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(2).jpg?raw=true')"></div>
+    <div class="w-full h-[70vh] overflow-hidden" oncontextmenu="return false;">
+        <div class="w-full h-full bg-cover bg-center main-image-zoom" style="background-image: url('https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(8).jpg?raw=true')"></div>
     </div>
 
     <!-- 초대글 -->
@@ -165,6 +150,7 @@
             앞날을 축복해 주시면 감사하겠습니다.
         </p>
         <div class="mt-12 text-lg text-gray-800 reveal">
+            <!-- 요청에 따라 이전 레이아웃으로 복구 -->
             <div class="mb-4">
                 <span class="font-semibold">지정익</span> · <span class="font-semibold">이경희</span> 의 아들 <span class="font-bold">지창대</span>
             </div>
@@ -209,12 +195,24 @@
         <div class="max-w-4xl mx-auto reveal">
             <h2 class="text-2xl font-semibold text-center mb-8 text-gray-800">Gallery</h2>
             <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(2).jpg?raw=true" alt="웨딩 사진 1" class="w-full h-48 md:h-64 object-cover cursor-pointer">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(5).jpg?raw=true" alt="웨딩 사진 2" class="w-full h-48 md:h-64 object-cover cursor-pointer">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(3).jpg?raw=true" alt="웨딩 사진 3" class="w-full h-48 md:h-64 object-cover cursor-pointer">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(4).jpg?raw=true" alt="웨딩 사진 4" class="w-full h-48 md:h-64 object-cover cursor-pointer">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(6).jpg?raw=true" alt="웨딩 사진 5" class="w-full h-48 md:h-64 object-cover cursor-pointer">
-                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(1).jpg?raw=true" alt="웨딩 사진 6" class="w-full h-48 md:h-64 object-cover cursor-pointer">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(2).jpg?raw=true" alt="웨딩 사진 1" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(5).jpg?raw=true" alt="웨딩 사진 2" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(3).jpg?raw=true" alt="웨딩 사진 3" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(4).jpg?raw=true" alt="웨딩 사진 4" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(6).jpg?raw=true" alt="웨딩 사진 5" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/images/mochung%20(1).jpg?raw=true" alt="웨딩 사진 6" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(1).jpg?raw=true" alt="웨딩 사진 7" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(2).jpg?raw=true" alt="웨딩 사진 8" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(3).jpg?raw=true" alt="웨딩 사진 9" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(4).jpg?raw=true" alt="웨딩 사진 10" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(5).jpg?raw=true" alt="웨딩 사진 11" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(6).jpg?raw=true" alt="웨딩 사진 12" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(7).jpg?raw=true" alt="웨딩 사진 13" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(8).jpg?raw=true" alt="웨딩 사진 14" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(9).jpg?raw=true" alt="웨딩 사진 15" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(10).jpg?raw=true" alt="웨딩 사진 16" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(11).jpg?raw=true" alt="웨딩 사진 17" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
+                <img src="https://github.com/sub3man/MOCHUNG/blob/main/tgcompressed/tg%20(12).jpg?raw=true" alt="웨딩 사진 18" class="w-full h-48 md:h-64 object-cover cursor-pointer" oncontextmenu="return false;" draggable="false">
             </div>
         </div>
     </section>
@@ -225,10 +223,9 @@
             <h2 class="text-2xl font-semibold mb-8 text-gray-800">Information</h2>
             <p class="text-xl font-semibold text-gray-800">고려대학교 교우회관</p>
             <p class="text-gray-600 mt-2">서울특별시 성북구 안암로 145</p>
-            <div class="my-8 border border-gray-200 rounded-lg overflow-hidden">
-                <a href="https://map.kakao.com/?urlX=507877.0&urlY=1136800.0&itemId=17565864&q=%EA%B3%A0%EB%A0%A4%EB%8C%80%ED%95%99%EA%B5%90%20%EA%B5%90%EC%9A%B0%ED%9A%8C%EA%B4%80&srcid=17565864&map_type=TYPE_MAP" target="_blank">
-                    <img class="w-full" src="http://t1.daumcdn.net/roughmap/imgmap/46794fdc530836464ef18fb6ce386bbdbd4ea3d55cf11b3ffb7528575e38a4f9" alt="고려대학교 교우회관 지도">
-                </a>
+            <div class="my-8 border border-gray-200 rounded-lg overflow-hidden" oncontextmenu="return false;">
+                <!-- 지도 이미지에서 링크 태그 제거 -->
+                <img class="w-full" src="http://t1.daumcdn.net/roughmap/imgmap/46794fdc530836464ef18fb6ce386bbdbd4ea3d55cf11b3ffb7528575e38a4f9" alt="고려대학교 교우회관 지도" draggable="false">
             </div>
             <div class="flex justify-center space-x-2">
                 <a href="https://kko.kakao.com/XLiE25FJzx" target="_blank" class="w-full bg-yellow-400 text-gray-800 font-semibold py-3 rounded-md">카카오맵</a>
@@ -247,17 +244,19 @@
                     <h3 class="font-semibold text-lg mb-3">신랑측 마음 전하실 곳</h3>
                     <div class="bg-gray-50 rounded-lg p-4 space-y-4">
                         <div class="flex justify-between items-center">
-                            <div>
-                                <p class="font-semibold">신랑 아버지 지정익</p>
-                                <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
-                            </div>
+                            <p class="font-semibold">신랑 아버지 지정익</p>
+                            <button onclick="toggleAccount('groom-father-account')" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">계좌번호 보기</button>
+                        </div>
+                        <div id="groom-father-account" class="hidden flex justify-between items-center">
+                            <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
                             <button onclick="copyToClipboard(this)" data-copy-text="[은행명] [계좌번호] 지정익" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div>
-                                <p class="font-semibold">신랑 지창대</p>
-                                <p class="text-sm text-gray-600">SC은행 496-20-038266</p>
-                            </div>
+                            <p class="font-semibold">신랑 지창대</p>
+                            <button onclick="toggleAccount('groom-account')" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">계좌번호 보기</button>
+                        </div>
+                        <div id="groom-account" class="hidden flex justify-between items-center">
+                            <p class="text-sm text-gray-600">SC은행 496-20-038266</p>
                             <button onclick="copyToClipboard(this)" data-copy-text="SC은행 496-20-038266 지창대" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
                         </div>
                     </div>
@@ -266,22 +265,31 @@
                     <h3 class="font-semibold text-lg mb-3">신부측 마음 전하실 곳</h3>
                     <div class="bg-gray-50 rounded-lg p-4 space-y-4">
                         <div class="flex justify-between items-center">
-                            <div>
-                                <p class="font-semibold">신부 아버지 맹도영</p>
-                                <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
-                            </div>
+                            <p class="font-semibold">신부 아버지 맹도영</p>
+                            <button onclick="toggleAccount('bride-father-account')" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">계좌번호 보기</button>
+                        </div>
+                        <div id="bride-father-account" class="hidden flex justify-between items-center">
+                            <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
                             <button onclick="copyToClipboard(this)" data-copy-text="[은행명] [계좌번호] 맹도영" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div>
-                                <p class="font-semibold">신부 맹다솔</p>
-                                <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
-                            </div>
+                            <p class="font-semibold">신부 맹다솔</p>
+                            <button onclick="toggleAccount('bride-account')" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">계좌번호 보기</button>
+                        </div>
+                        <div id="bride-account" class="hidden flex justify-between items-center">
+                            <p class="text-sm text-gray-600">[은행명 계좌번호]</p>
                             <button onclick="copyToClipboard(this)" data-copy-text="[은행명] [계좌번호] 맹다솔" class="bg-gray-200 text-sm px-3 py-1 rounded-md flex-shrink-0">복사하기</button>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- 계좌번호 섹션 아래에 Tally 폼 추가 -->
+            <div class="mt-12 w-full reveal">
+                <iframe data-tally-src="https://tally.so/embed/wAgABN?hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="333" frameborder="0" marginheight="0" marginwidth="0" title="null"></iframe>
+                <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+            </div>
+
         </div>
     </section>
 
@@ -291,10 +299,10 @@
     </section>
 
     <!-- 갤러리 라이트박스 -->
-    <div id="lightbox" class="lightbox">
+    <div id="lightbox" class="lightbox" oncontextmenu="return false;">
         <span class="lightbox-close">&times;</span>
         <span class="lightbox-nav prev">&#10094;</span>
-        <img id="lightbox-img" src="" alt="확대 이미지">
+        <img id="lightbox-img" src="" alt="확대 이미지" draggable="false">
         <span class="lightbox-nav next">&#10095;</span>
     </div>
     
@@ -340,6 +348,7 @@
             const lightboxImg = document.getElementById('lightbox-img');
             const galleryImages = document.querySelectorAll('#gallery-grid img');
             let currentIndex = 0;
+            let startX = 0;
 
             const showImage = (index) => {
                 if (index >= 0 && index < galleryImages.length) {
@@ -361,7 +370,32 @@
                     lightbox.style.display = 'none';
                 }
             });
+
+            // 스와이프 기능 추가
+            lightbox.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            lightbox.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].clientX;
+                const swipeDistance = endX - startX;
+                
+                // 오른쪽으로 스와이프 (이전 사진)
+                if (swipeDistance > 50) {
+                    showImage(currentIndex - 1);
+                }
+                // 왼쪽으로 스와이프 (다음 사진)
+                else if (swipeDistance < -50) {
+                    showImage(currentIndex + 1);
+                }
+            });
         });
+
+        // --- 계좌번호 토글 기능 ---
+        function toggleAccount(accountId) {
+            const accountDiv = document.getElementById(accountId);
+            accountDiv.classList.toggle('hidden');
+        }
         
         // --- 클립보드 복사 (토스트 알림 적용) ---
         const toast = document.getElementById('toast-notification');
